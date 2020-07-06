@@ -9,3 +9,4 @@ echo framework, mysql, gorm
 
 - [Installed packages](docs/packages.md)
 - [sql-migration command](docs/sql_migrate.md)
+- [Directory structure](docs/structure.md)

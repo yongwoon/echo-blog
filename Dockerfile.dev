@@ -9,7 +9,7 @@ RUN apk update && apk add --no-cache bash vim openssh curl gcc g++ git musl-dev 
   && go get github.com/cosmtrek/air \
   && GO111MODULE=off go get -v github.com/rubenv/sql-migrate/...
 
-WORKDIR /go/src/github.com/yongwoon/echo-blog
+WORKDIR /go/src/github.com/yongwoon/echo-blog-api
 
 COPY . .
 
