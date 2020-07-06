@@ -9,3 +9,5 @@ RUN apk update && apk add --no-cache bash vim openssh curl gcc g++ git musl-dev
 WORKDIR /go/src/github.com/yongwoon/echo-blog
 
 COPY . .
+
+RUN go mod download
