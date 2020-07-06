@@ -1,5 +1,11 @@
 # Set dev
 
+### set env file
+
+```bash
+cp .env.sample .env
+```
+
 ### build docker image
 
 ```bash
