@@ -1,29 +1,34 @@
 package v1
 
 import (
+	"fmt"
 	"net/http"
 
-	echo "github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4"
+	"github.com/yongwoon/echo-blog-api/db"
+	"github.com/yongwoon/echo-blog-api/model"
+	"github.com/yongwoon/echo-blog-api/serializer"
 )
 
 type (
-	// IPost interface
-	IPost interface {
-		Index(echo.Context) error
-	}
-
-	// Post struct
-	Post struct {
+	// PostController postController
+	PostController struct {
 	}
 )
 
 // NewPost returns NewPost instance.
-func NewPost() *Post {
-	return &Post{}
+func NewPost() *PostController {
+	return &PostController{}
 }
 
-// Index : api/vX/posts
-func (p *Post) Index(c echo.Context) error {
+// Index : api/v1/posts
+func (p *PostController) Index(c echo.Context) error {
+	db := db.DbManager()
+	var posts []model.Post
+	if err := db.Find(&posts); err != nil {
+		fmt.Println(err)
+	}
 
-	return c.JSON(http.StatusOK, "post all")
+	serializer := serializer.PostsSerializer{posts}
+	return c.JSON(http.StatusOK, serializer.Response())
 }

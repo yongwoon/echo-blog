@@ -10,6 +10,6 @@ func routeV1(e *echo.Echo) {
 	v1 := e.Group(config.APIVersion1)
 	posts := v1.Group("/posts")
 
-	postHandler := v1controller.NewPost()
-	posts.GET("", postHandler.Index)
+	postController := v1controller.NewPost()
+	posts.GET("", postController.Index)
 }
