@@ -2,7 +2,7 @@
 
 ```bash
 # echo framework
-go get github.com/labstack/echo
+go get github.com/labstack/echo/v4
 ```
 
 ## Package links
