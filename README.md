@@ -11,6 +11,10 @@ echo framework, mysql, gorm
 - [sql-migration command](docs/sql_migrate.md)
 - [Directory structure](docs/structure.md)
 
+## Links
+
+- [golang-echo-realworld-example-app](https://github.com/xesina/golang-echo-realworld-example-app)
+
 ## TODO
 
 - API
@@ -19,3 +23,4 @@ echo framework, mysql, gorm
   - DELETE api/v1/posts/:id
 - Test code
 - swagger
+- params validation
