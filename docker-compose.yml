@@ -18,7 +18,7 @@ services:
     links:
       - db
     volumes:
-      - .:/go/src/github.com/yongwoon/echo-blog-api
+      - .:/go/src/github.com/yongwoon/echo-blog
     networks:
       - dev_echo_blog_network
   db:

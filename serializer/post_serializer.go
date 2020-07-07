@@ -1,7 +1,7 @@
 package serializer
 
 import (
-	"github.com/yongwoon/echo-blog-api/model"
+	"github.com/yongwoon/echo-blog/model"
 )
 
 type (
