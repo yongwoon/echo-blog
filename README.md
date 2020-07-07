@@ -13,7 +13,9 @@ echo framework, mysql, gorm
 
 ## Links
 
-- [golang-echo-realworld-example-app](https://github.com/xesina/golang-echo-realworld-example-app)
+- [project layout](https://github.com/golang-standards/project-layout)
+- [golang echo realworld example app](https://github.com/xesina/golang-echo-realworld-example-app)
+- [build web application with golang](https://astaxie.gitbooks.io/build-web-application-with-golang/en/)
 
 ## TODO
 

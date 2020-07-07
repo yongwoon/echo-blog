@@ -38,7 +38,6 @@ func (p *PostController) Index(c echo.Context) error {
 func (p *PostController) Create(c echo.Context) error {
 	db := db.DbManager()
 
-	// ----------- params
 	req, err := form.NewPost(c)
 	if err != nil {
 		fmt.Println("--- post create error ------")
