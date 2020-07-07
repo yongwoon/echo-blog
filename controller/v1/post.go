@@ -5,9 +5,9 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
-	"github.com/yongwoon/echo-blog-api/db"
-	"github.com/yongwoon/echo-blog-api/model"
-	"github.com/yongwoon/echo-blog-api/serializer"
+	"github.com/yongwoon/echo-blog/db"
+	"github.com/yongwoon/echo-blog/model"
+	"github.com/yongwoon/echo-blog/serializer"
 )
 
 type (

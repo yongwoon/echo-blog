@@ -2,8 +2,8 @@ package route
 
 import (
 	"github.com/labstack/echo/v4"
-	"github.com/yongwoon/echo-blog-api/config"
-	v1controller "github.com/yongwoon/echo-blog-api/controller/v1"
+	"github.com/yongwoon/echo-blog/config"
+	v1controller "github.com/yongwoon/echo-blog/controller/v1"
 )
 
 func routeV1(e *echo.Echo) {
