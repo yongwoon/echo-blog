@@ -25,6 +25,14 @@
 
 - api controller
 
+## Serializer
+
+- json response
+
+## model
+
+- Define model
+
 ## doc
 
 - documentation

@@ -11,5 +11,7 @@ func Init(e *echo.Echo) {
 		return c.String(200, "OK")
 	})
 
+	e.Validator = NewValidator()
+
 	routeV1(e)
 }
