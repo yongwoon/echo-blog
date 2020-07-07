@@ -1,11 +1,12 @@
 package repository
 
-
 import (
+	"github.com/yongwoon/echo-blog/form"
 	"github.com/yongwoon/echo-blog/model"
 )
 
-type Store interface {
-	All() (*model.Post, error)
-	Create(*model.Post) error
+// PostRepository post repository interface
+type PostRepository interface {
+	GetAll() ([]model.Post, error)
+	Create(*model.Post, *form.PostCreateReq) error
 }
