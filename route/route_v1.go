@@ -12,4 +12,5 @@ func routeV1(e *echo.Echo) {
 
 	postController := v1controller.NewPost()
 	posts.GET("", postController.Index)
+	posts.POST("", postController.Create)
 }

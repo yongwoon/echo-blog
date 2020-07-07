@@ -1,47 +1,55 @@
 package serializer
 
 import (
+	"time"
+
 	"github.com/yongwoon/echo-blog/model"
 )
 
 type (
-	// PostSerializer one post record serializer
-	PostSerializer struct {
-		post model.Post
+	postSerializer struct {
+		ID        int       `json:"id"`
+		Title     string    `json:"title"`
+		Body      string    `json:"body"`
+		CreatedAt time.Time `json:"createdAt"`
+		UpdatedAt time.Time `json:"updatedAt"`
 	}
 
-	// PostsSerializer post list serializer
-	PostsSerializer struct {
-		Posts []model.Post
+	singlePostSerializer struct {
+		Post *postSerializer `json:"post"`
 	}
 
-	// PostResponse post response
-	PostResponse struct {
-		ID        int    `json:"id"`
-		Title     string `json:"title"`
-		Body      string `json:"body"`
-		CreatedAt string `json:"createdAt"`
-		UpdatedAt string `json:"updatedAt"`
+	postListSerializer struct {
+		Posts []*postSerializer `json:"posts"`
 	}
 )
 
-// Response one post record response
-func (s *PostSerializer) Response() PostResponse {
-	return PostResponse{
-		ID:        s.post.ID,
-		Title:     s.post.Title,
-		Body:      s.post.Body,
-		CreatedAt: s.post.CreatedAt.UTC().Format("2006-01-02T15:04:05.999Z"),
-		UpdatedAt: s.post.UpdatedAt.UTC().Format("2006-01-02T15:04:05.999Z"),
-	}
+// NewPostResponse return single post
+func NewPostResponse(p *model.Post) *singlePostSerializer {
+	pr := new(postSerializer)
+	pr.ID = p.ID
+	pr.Title = p.Title
+	pr.Body = p.Body
+	pr.CreatedAt = p.CreatedAt
+	pr.UpdatedAt = p.UpdatedAt
+
+	return &singlePostSerializer{pr}
 }
 
-// Response posts record response
-func (s *PostsSerializer) Response() []PostResponse {
-	response := []PostResponse{}
-	for _, post := range s.Posts {
-		serializer := PostSerializer{post}
-		response = append(response, serializer.Response())
+// NewPostListResponse return post list
+func NewPostListResponse(posts []model.Post) *postListSerializer {
+	r := new(postListSerializer)
+	r.Posts = make([]*postSerializer, 0)
+	for _, p := range posts {
+		ar := new(postSerializer)
+
+		ar.ID = p.ID
+		ar.Title = p.Title
+		ar.Body = p.Body
+		ar.CreatedAt = p.CreatedAt
+		ar.UpdatedAt = p.UpdatedAt
+		r.Posts = append(r.Posts, ar)
 	}
-	return response
+
+	return r
 }
