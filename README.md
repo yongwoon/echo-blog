@@ -1,4 +1,5 @@
 # echo-blog
+
 echo framework, mysql, gorm
 
 ## Set dev
@@ -22,6 +23,7 @@ echo framework, mysql, gorm
 - API
   - PATCH api/v1/posts/:id
   - DELETE api/v1/posts/:id
+- POST api/v1/posts TRACSACTION
 - Test code
 - swagger
 - Logger
