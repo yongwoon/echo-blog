@@ -33,6 +33,14 @@
 
 - Define model
 
+## repository
+
+- TODO
+
+## persistence
+
+- Controle to database
+
 ## doc
 
 - documentation

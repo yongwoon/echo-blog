@@ -19,10 +19,10 @@ echo framework, mysql, gorm
 
 ## TODO
 
-- 切り出す・・・ model
 - API
   - PATCH api/v1/posts/:id
-  - GET api/v1/posts/:id
   - DELETE api/v1/posts/:id
 - Test code
 - swagger
+- Logger
+- api error handling
