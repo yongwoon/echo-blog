@@ -3,6 +3,7 @@ package v1
 import (
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/labstack/echo/v4"
 
@@ -34,6 +35,18 @@ func (p *PostController) Index(c echo.Context) error {
 	}
 
 	return c.JSON(http.StatusOK, serializer.NewPostListResponse(posts))
+}
+
+// Show api/v1/posts
+func (p *PostController) Show(c echo.Context) error {
+	postID, err := strconv.ParseInt(c.Param("id"), 10, 64)
+
+	post, err := p.postRepository.GetByID(postID)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	return c.JSON(http.StatusOK, serializer.NewPostResponse(post))
 }
 
 // Create create post

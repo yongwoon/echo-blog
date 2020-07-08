@@ -29,6 +29,24 @@ func (p PostPersistence) GetAll() ([]model.Post, error) {
 	return posts, nil
 }
 
+// GetByID get post by ID
+func (p PostPersistence) GetByID(id int64) (*model.Post, error) {
+	db := db.DbManager()
+
+	var post model.Post
+
+	if notExist := db.First(&post, id).RecordNotFound(); notExist == true {
+		fmt.Println("post not funnd")
+		return nil, nil
+	}
+
+	if err := db.First(&post, id); err != nil {
+		fmt.Println(err)
+	}
+
+	return &post, nil
+}
+
 // Create get all posts
 func (p PostPersistence) Create(post *model.Post, req *form.PostCreateReq) error {
 	db := db.DbManager()

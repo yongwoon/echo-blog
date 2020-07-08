@@ -24,3 +24,5 @@ echo framework, mysql, gorm
   - DELETE api/v1/posts/:id
 - Test code
 - swagger
+- Logger
+- api error handling
