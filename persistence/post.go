@@ -51,7 +51,13 @@ func (p PostPersistence) Create(post *model.Post, req *form.PostCreateReq) error
 
 	post.Title = req.Post.Title
 	post.Body = req.Post.Body
-	db.Create(&post)
 
-	return nil
+	tx := db.Begin()
+
+	if err := tx.Create(&post).Error; err != nil {
+		tx.Rollback()
+		return err
+	}
+
+	return tx.Commit().Error
 }
