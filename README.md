@@ -20,8 +20,6 @@ echo framework, mysql, gorm
 
 ## TODO
 
-- API
-  - DELETE api/v1/posts/:id
 - Test code
 - swagger
 - Logger

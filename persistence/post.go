@@ -85,3 +85,10 @@ func (p PostPersistence) Update(post *model.Post, req *form.PostUpdateReq) error
 
 	return tx.Commit().Error
 }
+
+// Delete delete post
+func (p PostPersistence) Delete(post *model.Post) error {
+	db := db.DbManager()
+
+	return db.Delete(post).Error
+}

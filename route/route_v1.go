@@ -14,7 +14,8 @@ func routeV1(e *echo.Echo) {
 	postPersistence := persistence.NewPostPersistence()
 	postController := v1controller.NewPost(postPersistence)
 	posts.GET("", postController.Index)
+	posts.POST("", postController.Create)
 	posts.GET("/:id", postController.Show)
 	posts.PATCH("/:id", postController.Update)
-	posts.POST("", postController.Create)
+	posts.DELETE("/:id", postController.Delete)
 }

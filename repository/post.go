@@ -11,4 +11,5 @@ type PostRepository interface {
 	GetByID(id int64) (*model.Post, error)
 	Create(*model.Post, *form.PostCreateReq) error
 	Update(*model.Post, *form.PostUpdateReq) error
+	Delete(*model.Post) error
 }
