@@ -68,3 +68,20 @@ func (p PostPersistence) Create(post *model.Post, req *form.PostCreateReq) error
 
 	return tx.Commit().Error
 }
+
+// Update get all posts
+func (p PostPersistence) Update(post *model.Post, req *form.PostUpdateReq) error {
+	db := db.DbManager()
+
+	post.Title = req.Post.Title
+	post.Body = req.Post.Body
+
+	tx := db.Begin()
+
+	if err := tx.Model(post).Update(post).Error; err != nil {
+		tx.Rollback()
+		return err
+	}
+
+	return tx.Commit().Error
+}
