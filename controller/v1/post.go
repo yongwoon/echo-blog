@@ -29,12 +29,12 @@ func NewPost(pr repository.PostRepository) *PostController {
 
 // Index api/v1/posts
 func (p *PostController) Index(c echo.Context) error {
-	posts, err := p.postRepository.GetAll()
+	posts, count, err := p.postRepository.GetAll()
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, utils.NewError(err))
 	}
 
-	return c.JSON(http.StatusOK, serializer.NewPostListResponse(posts))
+	return c.JSON(http.StatusOK, serializer.NewPostListResponse(posts, count))
 }
 
 // Show api/v1/posts

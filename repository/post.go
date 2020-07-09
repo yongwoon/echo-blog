@@ -7,7 +7,7 @@ import (
 
 // PostRepository post repository interface
 type PostRepository interface {
-	GetAll() ([]model.Post, error)
+	GetAll() ([]model.Post, int, error)
 	GetByID(id int64) (*model.Post, error)
 	Create(*model.Post, *form.PostCreateReq) error
 }

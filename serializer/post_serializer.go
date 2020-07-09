@@ -8,7 +8,7 @@ import (
 
 type (
 	postSerializer struct {
-		ID        int       `json:"id"`
+		ID        uint      `json:"id"`
 		Title     string    `json:"title"`
 		Body      string    `json:"body"`
 		CreatedAt time.Time `json:"createdAt"`
@@ -20,13 +20,15 @@ type (
 	}
 
 	postListSerializer struct {
-		Posts []*postSerializer `json:"posts"`
+		Posts      []*postSerializer `json:"posts"`
+		PostsCount int               `json:"postsCount"`
 	}
 )
 
 // NewPostResponse return single post
 func NewPostResponse(p *model.Post) *singlePostSerializer {
 	pr := new(postSerializer)
+
 	pr.ID = p.ID
 	pr.Title = p.Title
 	pr.Body = p.Body
@@ -37,7 +39,7 @@ func NewPostResponse(p *model.Post) *singlePostSerializer {
 }
 
 // NewPostListResponse return post list
-func NewPostListResponse(posts []model.Post) *postListSerializer {
+func NewPostListResponse(posts []model.Post, count int) *postListSerializer {
 	r := new(postListSerializer)
 	r.Posts = make([]*postSerializer, 0)
 	for _, p := range posts {
@@ -50,6 +52,7 @@ func NewPostListResponse(posts []model.Post) *postListSerializer {
 		ar.UpdatedAt = p.UpdatedAt
 		r.Posts = append(r.Posts, ar)
 	}
+	r.PostsCount = count
 
 	return r
 }

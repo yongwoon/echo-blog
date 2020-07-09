@@ -18,14 +18,21 @@ func NewPostPersistence() repository.PostRepository {
 }
 
 // GetAll get all posts
-func (p PostPersistence) GetAll() ([]model.Post, error) {
+func (p PostPersistence) GetAll() ([]model.Post, int, error) {
 	db := db.DbManager()
 
-	var posts []model.Post
+	var (
+		posts []model.Post
+		count int
+	)
+
 	if err := db.Find(&posts).Error; err != nil {
-		return posts, err
+		return posts, 0, err
 	}
-	return posts, nil
+
+	db.Model(&posts).Count(&count)
+
+	return posts, count, nil
 }
 
 // GetByID get post by ID
