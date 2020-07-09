@@ -21,11 +21,7 @@ echo framework, mysql, gorm
 ## TODO
 
 - API
-  - PATCH api/v1/posts/:id
   - DELETE api/v1/posts/:id
-- GET api/v1/posts
-  - persistence respose に count 追加
 - Test code
 - swagger
 - Logger
-- post 関連 api から id が 0 に返している不具合修正
