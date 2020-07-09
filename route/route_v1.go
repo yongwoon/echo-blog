@@ -15,5 +15,6 @@ func routeV1(e *echo.Echo) {
 	postController := v1controller.NewPost(postPersistence)
 	posts.GET("", postController.Index)
 	posts.GET("/:id", postController.Show)
+	posts.PATCH("/:id", postController.Update)
 	posts.POST("", postController.Create)
 }

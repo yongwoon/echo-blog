@@ -68,3 +68,28 @@ func (p *PostController) Create(c echo.Context) error {
 
 	return c.JSON(http.StatusCreated, serializer.NewPostResponse(&post))
 }
+
+// Update post
+func (p *PostController) Update(c echo.Context) error {
+	postID, err := strconv.ParseInt(c.Param("id"), 10, 64)
+
+	post, err := p.postRepository.GetByID(postID)
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, utils.NewError(err))
+	}
+
+	if post == nil {
+		return c.JSON(http.StatusNotFound, utils.NotFound())
+	}
+
+	req, err := form.UpdatePost(c)
+	if err != nil {
+		return c.JSON(http.StatusUnprocessableEntity, utils.NewError(err))
+	}
+
+	if err = p.postRepository.Update(post, req); err != nil {
+		return c.JSON(http.StatusUnprocessableEntity, utils.NewError(err))
+	}
+
+	return c.JSON(http.StatusOK, serializer.NewPostResponse(post))
+}
