@@ -1,7 +1,6 @@
 package v1
 
 import (
-	"fmt"
 	"net/http"
 	"strconv"
 
@@ -11,6 +10,7 @@ import (
 	"github.com/yongwoon/echo-blog/model"
 	"github.com/yongwoon/echo-blog/repository"
 	"github.com/yongwoon/echo-blog/serializer"
+	"github.com/yongwoon/echo-blog/utils"
 )
 
 type (
@@ -31,7 +31,7 @@ func NewPost(pr repository.PostRepository) *PostController {
 func (p *PostController) Index(c echo.Context) error {
 	posts, err := p.postRepository.GetAll()
 	if err != nil {
-		fmt.Println(err)
+		return c.JSON(http.StatusInternalServerError, utils.NewError(err))
 	}
 
 	return c.JSON(http.StatusOK, serializer.NewPostListResponse(posts))
@@ -43,7 +43,11 @@ func (p *PostController) Show(c echo.Context) error {
 
 	post, err := p.postRepository.GetByID(postID)
 	if err != nil {
-		fmt.Println(err)
+		return c.JSON(http.StatusInternalServerError, utils.NewError(err))
+	}
+
+	if post == nil {
+		return c.JSON(http.StatusNotFound, utils.NotFound())
 	}
 
 	return c.JSON(http.StatusOK, serializer.NewPostResponse(post))
@@ -53,13 +57,13 @@ func (p *PostController) Show(c echo.Context) error {
 func (p *PostController) Create(c echo.Context) error {
 	req, err := form.NewPost(c)
 	if err != nil {
-		fmt.Println("--- post create error ------")
+		return c.JSON(http.StatusUnprocessableEntity, utils.NewError(err))
 	}
 
 	var post model.Post
 	err = p.postRepository.Create(&post, req)
 	if err != nil {
-		fmt.Println(err)
+		return c.JSON(http.StatusUnprocessableEntity, utils.NewError(err))
 	}
 
 	return c.JSON(http.StatusCreated, serializer.NewPostResponse(&post))

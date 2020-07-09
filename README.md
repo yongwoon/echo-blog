@@ -23,7 +23,10 @@ echo framework, mysql, gorm
 - API
   - PATCH api/v1/posts/:id
   - DELETE api/v1/posts/:id
-- POST api/v1/posts TRACSACTION
+- GET api/v1/posts
+  - persistence respose に count 追加
+- POST api/v1/posts
+  - TRACSACTION
 - Test code
 - swagger
 - Logger

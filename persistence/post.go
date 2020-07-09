@@ -1,8 +1,6 @@
 package persistence
 
 import (
-	"fmt"
-
 	"github.com/jinzhu/gorm"
 	"github.com/yongwoon/echo-blog/db"
 	"github.com/yongwoon/echo-blog/form"
@@ -24,8 +22,8 @@ func (p PostPersistence) GetAll() ([]model.Post, error) {
 	db := db.DbManager()
 
 	var posts []model.Post
-	if err := db.Find(&posts); err != nil {
-		fmt.Println(err)
+	if err := db.Find(&posts).Error; err != nil {
+		return posts, err
 	}
 	return posts, nil
 }
