@@ -3,8 +3,8 @@ package utils
 import (
 	"fmt"
 
+	"github.com/go-playground/validator/v10"
 	"github.com/labstack/echo/v4"
-	"gopkg.in/go-playground/validator.v10"
 )
 
 // Error struct

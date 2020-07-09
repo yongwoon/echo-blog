@@ -1,8 +1,7 @@
 package persistence
 
 import (
-	"fmt"
-
+	"github.com/jinzhu/gorm"
 	"github.com/yongwoon/echo-blog/db"
 	"github.com/yongwoon/echo-blog/form"
 	"github.com/yongwoon/echo-blog/model"
@@ -23,8 +22,8 @@ func (p PostPersistence) GetAll() ([]model.Post, error) {
 	db := db.DbManager()
 
 	var posts []model.Post
-	if err := db.Find(&posts); err != nil {
-		fmt.Println(err)
+	if err := db.Find(&posts).Error; err != nil {
+		return posts, err
 	}
 	return posts, nil
 }
@@ -35,13 +34,12 @@ func (p PostPersistence) GetByID(id int64) (*model.Post, error) {
 
 	var post model.Post
 
-	if notExist := db.First(&post, id).RecordNotFound(); notExist == true {
-		fmt.Println("post not funnd")
-		return nil, nil
-	}
-
-	if err := db.First(&post, id); err != nil {
-		fmt.Println(err)
+	err := db.First(&post, id).Error
+	if err != nil {
+		if gorm.IsRecordNotFoundError(err) {
+			return nil, nil
+		}
+		return nil, err
 	}
 
 	return &post, nil
