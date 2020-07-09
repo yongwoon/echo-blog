@@ -93,3 +93,24 @@ func (p *PostController) Update(c echo.Context) error {
 
 	return c.JSON(http.StatusOK, serializer.NewPostResponse(post))
 }
+
+// Delete post
+func (p *PostController) Delete(c echo.Context) error {
+	postID, err := strconv.ParseInt(c.Param("id"), 10, 64)
+
+	post, err := p.postRepository.GetByID(postID)
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, utils.NewError(err))
+	}
+
+	if post == nil {
+		return c.JSON(http.StatusNotFound, utils.NotFound())
+	}
+
+	err = p.postRepository.Delete(post)
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, utils.NewError(err))
+	}
+
+	return c.JSON(http.StatusOK, serializer.NewSuccessResponse())
+}
