@@ -8,7 +8,7 @@ import (
 
 type (
 	postSerializer struct {
-		ID        int       `json:"id"`
+		ID        uint      `json:"id"`
 		Title     string    `json:"title"`
 		Body      string    `json:"body"`
 		CreatedAt time.Time `json:"createdAt"`
@@ -28,6 +28,7 @@ type (
 // NewPostResponse return single post
 func NewPostResponse(p *model.Post) *singlePostSerializer {
 	pr := new(postSerializer)
+
 	pr.ID = p.ID
 	pr.Title = p.Title
 	pr.Body = p.Body
