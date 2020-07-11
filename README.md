@@ -22,4 +22,3 @@ echo framework, mysql, gorm
 
 - Test code
 - swagger
-- Logger

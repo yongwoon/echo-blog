@@ -2,9 +2,10 @@ package main
 
 import (
 	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
+	echoMw "github.com/labstack/echo/v4/middleware"
 	"github.com/yongwoon/echo-blog/config/initializer"
 	"github.com/yongwoon/echo-blog/db"
+	"github.com/yongwoon/echo-blog/middleware"
 	"github.com/yongwoon/echo-blog/route"
 )
 
@@ -14,7 +15,9 @@ func main() {
 	db.Init()
 
 	e := echo.New()
-	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+
+	e.Use(middleware.AccessLog())
+	e.Use(echoMw.CORSWithConfig(echoMw.CORSConfig{
 		AllowOrigins: []string{
 			"http://localhost:8080",
 		},
