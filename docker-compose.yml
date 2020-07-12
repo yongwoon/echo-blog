@@ -21,6 +21,26 @@ services:
       - .:/go/src/github.com/yongwoon/echo-blog
     networks:
       - dev_echo_blog_network
+  goconvey:
+    container_name: dev_echo_blog_goconvey
+    build:
+      context: ./
+      dockerfile: DockerfileGoconvey.dev
+    environment:
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=
+      - DATABASE_HOST=db
+      - DATABASE_PORT=3306
+      - DATABASE_SCHEMA=echo_blog_development
+    ports:
+      - 9000:8080
+    tty: true
+    links:
+      - db
+    volumes:
+      - .:/go/src/github.com/yongwoon/echo-blog
+    networks:
+      - dev_echo_blog_network
   db:
     container_name: dev_echo_blog_db
     image: mysql:8.0

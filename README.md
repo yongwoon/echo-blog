@@ -6,6 +6,20 @@ echo framework, mysql, gorm
 
 - [Set develop env](./docs/dev.md)
 
+## execute test code
+
+- testwith script
+
+```bash
+ENVIRONMENT=test go test -v ...
+```
+
+- test with browser(in api container)
+
+```bash
+$GOPATH/bin/goconvey
+```
+
 ## Reference
 
 - [Installed packages](docs/packages.md)
@@ -17,8 +31,10 @@ echo framework, mysql, gorm
 - [project layout](https://github.com/golang-standards/project-layout)
 - [golang echo realworld example app](https://github.com/xesina/golang-echo-realworld-example-app)
 - [build web application with golang](https://astaxie.gitbooks.io/build-web-application-with-golang/en/)
+- [goconvey](http://goconvey.co/)
+- [goconvey github](https://github.com/smartystreets/goconvey)
+- [gconvey in docker?](https://github.com/smartystreets/goconvey/issues/449)
 
 ## TODO
 
 - Test code
-- swagger
