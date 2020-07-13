@@ -6,6 +6,14 @@ echo framework, mysql, gorm
 
 - [Set develop env](./docs/dev.md)
 
+## execute test code
+
+- testwith script
+
+```bash
+ENVIRONMENT=test go test -v ...
+```
+
 ## Reference
 
 - [Installed packages](docs/packages.md)
