@@ -6,9 +6,7 @@ ENV GO111MODULE=on
 ENV GOPATH /go
 
 RUN apk update && apk add --no-cache bash vim openssh curl gcc g++ git musl-dev \
-  && go get github.com/cosmtrek/air \
-  && go get -v github.com/smartystreets/goconvey \
-  && GO111MODULE=off go get -v github.com/rubenv/sql-migrate/...
+  && go get github.com/smartystreets/goconvey
 
 WORKDIR /go/src/github.com/yongwoon/echo-blog
 
@@ -16,4 +14,4 @@ COPY . .
 
 RUN go mod download
 
-CMD air -c .air.conf
+CMD goconvey -host 0.0.0.0
