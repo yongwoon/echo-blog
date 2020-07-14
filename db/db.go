@@ -5,11 +5,13 @@ import (
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+	"github.com/yongwoon/echo-blog/model"
 )
 
 var db *gorm.DB
 var err error
 
+// Init gorm db
 func Init() *gorm.DB {
 	DBMS := "mysql"
 	HOST := os.Getenv("DATABASE_HOST")
@@ -26,12 +28,17 @@ func Init() *gorm.DB {
 		panic(err.Error())
 	}
 
+	if os.Getenv("ENVIRONMENT") == "test" {
+		db.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(&model.Post{})
+	}
+
 	db.Set("gorm:table_options", "ENGINE=InnoDB")
 	db.LogMode(true)
-	// db.AutoMigrate(&model.Post{})
+
 	return db
 }
 
+// DbManager get db connector
 func DbManager() *gorm.DB {
 	return db
 }
