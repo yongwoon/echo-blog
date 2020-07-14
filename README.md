@@ -26,8 +26,4 @@ ENVIRONMENT=test go test -v ./...
 - [goconvey](http://goconvey.co/)
 - [goconvey github](https://github.com/smartystreets/goconvey)
 - [gconvey in docker?](https://github.com/smartystreets/goconvey/issues/449)
-
-## TODO
-
-- Test code
-- swagger
+- [net/http status codes](http://golang.jp/pkg/http)
