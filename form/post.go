@@ -1,6 +1,7 @@
 package form
 
 import (
+	"github.com/asaskevich/govalidator"
 	"github.com/labstack/echo/v4"
 )
 
@@ -29,7 +30,7 @@ func NewPost(c echo.Context) (*PostCreateReq, error) {
 		return nil, err
 	}
 
-	if err := c.Validate(p); err != nil {
+	if _, err := govalidator.ValidateStruct(p); err != nil {
 		return nil, err
 	}
 	return p, nil
@@ -42,7 +43,7 @@ func UpdatePost(c echo.Context) (*PostUpdateReq, error) {
 		return nil, err
 	}
 
-	if err := c.Validate(p); err != nil {
+	if _, err := govalidator.ValidateStruct(p); err != nil {
 		return nil, err
 	}
 	return p, nil
