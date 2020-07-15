@@ -168,7 +168,7 @@ func TestPostUpdate(t *testing.T) {
 		var res serializer.SinglePostSerializer
 		test.ParseResponseBody(rec.Body, &res)
 
-		Convey("post が登録される", func() {
+		Convey("post が更新される", func() {
 			Convey("success", func() {
 				So(rec.Code, ShouldEqual, http.StatusOK)
 			})
@@ -176,6 +176,39 @@ func TestPostUpdate(t *testing.T) {
 			Convey("response registerd post title", func() {
 				So(res.Post.Title, ShouldEqual, "updated-title")
 			})
+		})
+
+		Reset(func() {
+			test.Teardown()
+		})
+	})
+}
+
+func TestPostDelete(t *testing.T) {
+	Convey("DELETE api/v1/posts/:id", t, func() {
+		e := echo.New()
+		test.Setup()
+		test.ImportFixture()
+
+		req := httptest.NewRequest(http.MethodDelete, "/api/v1/posts/:id", nil)
+		req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
+		rec := httptest.NewRecorder()
+
+		c := e.NewContext(req, rec)
+		c.SetPath("/api/v1/posts/:id")
+		c.SetParamNames("id")
+		c.SetParamValues("1")
+
+		postPersistence := persistence.NewPostPersistence()
+		pc := NewPost(postPersistence)
+		pc.Delete(c)
+
+		Convey("post が削除される", func() {
+			So(rec.Code, ShouldEqual, http.StatusOK)
+		})
+
+		Reset(func() {
+			test.Teardown()
 		})
 	})
 }
