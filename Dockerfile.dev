@@ -6,8 +6,17 @@ ENV GO111MODULE=on
 ENV GOPATH /go
 
 RUN apk update && apk add --no-cache bash vim openssh curl gcc g++ git musl-dev \
-  && go get github.com/cosmtrek/air \
-  && GO111MODULE=off go get -v github.com/rubenv/sql-migrate/...
+  && go get -u -v \
+  github.com/cosmtrek/air \
+  github.com/smartystreets/goconvey \
+  golang.org/x/tools/gopls@latest \
+  github.com/ramya-rao-a/go-outline \
+  github.com/rogpeppe/godef \
+  golang.org/x/tools/cmd/goimports \
+  golang.org/x/lint/golint \
+  && GO111MODULE=off go get -v \
+  github.com/rubenv/sql-migrate/... \
+  github.com/go-delve/delve/cmd/dlv
 
 WORKDIR /go/src/github.com/yongwoon/echo-blog
 
@@ -15,4 +24,4 @@ COPY . .
 
 RUN go mod download
 
-CMD air -c .air.conf
+# CMD air -c .air.conf

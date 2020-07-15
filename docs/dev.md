@@ -59,3 +59,17 @@ sql-migrate up -config=config/database.yml -env="development"
 
 - reference
   - [sql_migrate](./../api/docs/sql_migrate.md)
+
+### run server
+
+- access to api container
+
+```bash
+docker-compose exec api bash
+```
+
+- run
+
+```bash
+air -c .air.conf
+```
