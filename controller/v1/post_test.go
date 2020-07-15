@@ -142,3 +142,40 @@ func TestPostCreate(t *testing.T) {
 		})
 	})
 }
+
+func TestPostUpdate(t *testing.T) {
+	Convey("PATCH api/v1/posts/:id", t, func() {
+		e := echo.New()
+		test.Setup()
+		test.ImportFixture()
+
+		var reqJSON = `{"post":{"title":"updated-title", "body":"updated-body"}}`
+
+		req := httptest.NewRequest(http.MethodPatch, "/api/v1/posts/:id", strings.NewReader(reqJSON))
+		req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
+		rec := httptest.NewRecorder()
+
+		c := e.NewContext(req, rec)
+		c.SetPath("/api/v1/posts")
+		c.SetPath("/api/v1/posts/:id")
+		c.SetParamNames("id")
+		c.SetParamValues("1")
+
+		postPersistence := persistence.NewPostPersistence()
+		pc := NewPost(postPersistence)
+		pc.Update(c)
+
+		var res serializer.SinglePostSerializer
+		test.ParseResponseBody(rec.Body, &res)
+
+		Convey("post が登録される", func() {
+			Convey("success", func() {
+				So(rec.Code, ShouldEqual, http.StatusOK)
+			})
+
+			Convey("response registerd post title", func() {
+				So(res.Post.Title, ShouldEqual, "updated-title")
+			})
+		})
+	})
+}

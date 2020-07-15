@@ -37,6 +37,7 @@ func NewPost(c echo.Context) (*PostCreateReq, error) {
 }
 
 // UpdatePost create post form
+// TODO: title, body が両方ない場合の  validation 追加
 func UpdatePost(c echo.Context) (*PostUpdateReq, error) {
 	p := &PostUpdateReq{}
 	if err := c.Bind(p); err != nil {
