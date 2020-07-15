@@ -15,7 +15,18 @@ go get github.com/NYTimes/logrotate
 go get github.com/valyala/fasttemplate
 # test framework
 go get github.com/smartystreets/goconvey
+```
 
+## packages for only develop
+
+```bash
+golang.org/x/tools/gopls@latest
+github.com/ramya-rao-a/go-outline
+github.com/rogpeppe/godef
+golang.org/x/tools/cmd/goimports
+golang.org/x/lint/golint
+github.com/rubenv/sql-migrate/...
+github.com/go-delve/delve/cmd/dlv
 ```
 
 ## Package links
