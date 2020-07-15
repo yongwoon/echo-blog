@@ -4,6 +4,7 @@ go 1.14
 
 require (
 	github.com/NYTimes/logrotate v1.0.0
+	github.com/asaskevich/govalidator v0.0.0-20200428143746-21a406dcc535
 	github.com/go-sql-driver/mysql v1.5.0
 	github.com/go-testfixtures/testfixtures/v3 v3.3.0
 	github.com/jinzhu/gorm v1.9.14
