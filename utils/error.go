@@ -1,9 +1,6 @@
 package utils
 
 import (
-	"fmt"
-
-	"github.com/go-playground/validator/v10"
 	"github.com/labstack/echo/v4"
 )
 
@@ -21,17 +18,6 @@ func NewError(err error) Error {
 		e.Errors["message"] = v.Message
 	default:
 		e.Errors["message"] = v.Error()
-	}
-	return e
-}
-
-// NewValidatorError validation error
-func NewValidatorError(err error) Error {
-	e := Error{}
-	e.Errors = make(map[string]interface{})
-	errs := err.(validator.ValidationErrors)
-	for _, v := range errs {
-		e.Errors[v.Field()] = fmt.Sprintf("%v", v.Tag())
 	}
 	return e
 }
