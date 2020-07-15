@@ -13,7 +13,7 @@ import (
 	"github.com/yongwoon/echo-blog/test"
 )
 
-func TestPostIndexCaseGeneral(t *testing.T) {
+func TestPostIndex(t *testing.T) {
 	Convey("GET api/v1/posts", t, func() {
 		Convey("post が存在する場合", func() {
 			e := echo.New()
@@ -59,6 +59,49 @@ func TestPostIndexCaseGeneral(t *testing.T) {
 
 			So(rec.Code, ShouldEqual, http.StatusOK)
 			So(strings.TrimSpace(rec.Body.String()), ShouldEqual, resultJSON)
+		})
+
+		Reset(func() {
+			test.Teardown()
+		})
+	})
+}
+
+func TestPostShow(t *testing.T) {
+	Convey("GET api/v1/posts/:id", t, func() {
+		e := echo.New()
+		test.Setup()
+		test.ImportFixture()
+		req := httptest.NewRequest(http.MethodGet, "/api/v1/posts/:id", nil)
+		req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
+		rec := httptest.NewRecorder()
+
+		c := e.NewContext(req, rec)
+		c.SetPath("/api/v1/posts/:id")
+		c.SetParamNames("id")
+
+		Convey("post が存在しない場合", func() {
+			c.SetParamValues("99999")
+
+			postPersistence := persistence.NewPostPersistence()
+			pc := NewPost(postPersistence)
+			pc.Show(c)
+
+			Convey("404 error", func() {
+				So(rec.Code, ShouldEqual, http.StatusNotFound)
+			})
+		})
+
+		Convey("post が存在する場合", func() {
+			c.SetParamValues("3")
+
+			postPersistence := persistence.NewPostPersistence()
+			pc := NewPost(postPersistence)
+			pc.Show(c)
+
+			Convey("success", func() {
+				So(rec.Code, ShouldEqual, http.StatusOK)
+			})
 		})
 
 		Reset(func() {
