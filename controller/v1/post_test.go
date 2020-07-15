@@ -156,7 +156,6 @@ func TestPostUpdate(t *testing.T) {
 		rec := httptest.NewRecorder()
 
 		c := e.NewContext(req, rec)
-		c.SetPath("/api/v1/posts")
 		c.SetPath("/api/v1/posts/:id")
 		c.SetParamNames("id")
 		c.SetParamValues("1")

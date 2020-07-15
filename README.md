@@ -10,6 +10,7 @@ echo framework, mysql, gorm
 
 ```bash
 ENVIRONMENT=test go test -v ./...
+ENVIRONMENT=test go test ./...
 ```
 
 ## Reference
@@ -27,10 +28,10 @@ ENVIRONMENT=test go test -v ./...
 - [goconvey github](https://github.com/smartystreets/goconvey)
 - [gconvey in docker?](https://github.com/smartystreets/goconvey/issues/449)
 - [net/http status codes](http://golang.jp/pkg/http)
+- [echo middleware test](https://github.com/labstack/echo/issues/659)
 
 ## TODO
 
 - test
-  - form
   - persistence
 - swagger
