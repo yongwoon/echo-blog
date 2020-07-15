@@ -21,7 +21,7 @@ func Init() *gorm.DB {
 	DBNAME := os.Getenv("DATABASE_SCHEMA")
 
 	PROTOCOL := "tcp(" + HOST + ":" + PORT + ")"
-	CONNECT := USER + ":" + PASS + "@" + PROTOCOL + "/" + DBNAME + "?parseTime=true"
+	CONNECT := USER + ":" + PASS + "@" + PROTOCOL + "/" + DBNAME + "?charset=utf8mb4&collation=utf8mb4_general_ci&parseTime=true"
 
 	db, err = gorm.Open(DBMS, CONNECT)
 	if err != nil {
