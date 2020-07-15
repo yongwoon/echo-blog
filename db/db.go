@@ -30,10 +30,10 @@ func Init() *gorm.DB {
 
 	if os.Getenv("ENVIRONMENT") == "test" {
 		db.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(&model.Post{})
+	} else {
+		db.Set("gorm:table_options", "ENGINE=InnoDB")
+		db.LogMode(true)
 	}
-
-	db.Set("gorm:table_options", "ENGINE=InnoDB")
-	db.LogMode(true)
 
 	return db
 }

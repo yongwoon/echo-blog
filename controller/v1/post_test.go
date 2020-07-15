@@ -109,3 +109,36 @@ func TestPostShow(t *testing.T) {
 		})
 	})
 }
+
+func TestPostCreate(t *testing.T) {
+	Convey("POST api/v1/posts/", t, func() {
+		e := echo.New()
+		test.Setup()
+
+		var reqJSON = `{"post":{"title":"test-title", "body":"test-body"}}`
+
+		req := httptest.NewRequest(http.MethodPost, "/api/v1/posts", strings.NewReader(reqJSON))
+		req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
+		rec := httptest.NewRecorder()
+
+		c := e.NewContext(req, rec)
+		c.SetPath("/api/v1/posts")
+
+		postPersistence := persistence.NewPostPersistence()
+		pc := NewPost(postPersistence)
+		pc.Create(c)
+
+		var res serializer.SinglePostSerializer
+		test.ParseResponseBody(rec.Body, &res)
+
+		Convey("post が登録される", func() {
+			Convey("success", func() {
+				So(rec.Code, ShouldEqual, http.StatusOK)
+			})
+
+			Convey("response registerd post title", func() {
+				So(res.Post.Title, ShouldEqual, "test-title")
+			})
+		})
+	})
+}

@@ -66,7 +66,7 @@ func (p *PostController) Create(c echo.Context) error {
 		return c.JSON(http.StatusUnprocessableEntity, utils.NewError(err))
 	}
 
-	return c.JSON(http.StatusCreated, serializer.NewPostResponse(&post))
+	return c.JSON(http.StatusOK, serializer.NewPostResponse(&post))
 }
 
 // Update post
