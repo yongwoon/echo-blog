@@ -15,7 +15,7 @@ const (
 	PRD = "production"
 )
 
-// IsPRD 本番かどうか
+// IsPRD prod?
 func IsPRD() bool {
 	if Env() == PRD {
 		return true
@@ -23,7 +23,7 @@ func IsPRD() bool {
 	return false
 }
 
-// IsDEV 開発かどうか
+// IsDEV dev?
 func IsDEV() bool {
 	if Env() == DEV {
 		return true
@@ -31,7 +31,7 @@ func IsDEV() bool {
 	return false
 }
 
-// IsLOCAL ローカル環境かどうか
+// IsLOCAL local?
 func IsLOCAL() bool {
 	if Env() == LOCAL {
 		return true
@@ -39,7 +39,7 @@ func IsLOCAL() bool {
 	return false
 }
 
-// IsTEST テスト環境かどうか
+// IsTEST test?
 func IsTEST() bool {
 	if Env() == TEST {
 		return true
@@ -47,7 +47,7 @@ func IsTEST() bool {
 	return false
 }
 
-// Env ステージを取得
+// Env get environment
 func Env() string {
 	if env := os.Getenv("GO_ENV"); env == TEST || env == DEV || env == PRD {
 		return env
