@@ -32,6 +32,4 @@ ENVIRONMENT=test go test ./...
 
 ## TODO
 
-- test
-  - persistence
 - swagger
