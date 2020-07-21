@@ -27,7 +27,13 @@ func NewPost(pr repository.PostRepository) *PostController {
 	}
 }
 
-// Index api/v1/posts
+// Index get all posts
+// @Summary get posts
+// @Description get all posts
+// @Accept  json
+// @Produce  json
+// @Success 200 {object} serializer.PostListSerializer
+// @Router /api/v1/posts [get]
 func (p *PostController) Index(c echo.Context) error {
 	posts, count, err := p.postRepository.GetAll()
 	if err != nil {
