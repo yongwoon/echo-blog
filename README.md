@@ -29,6 +29,15 @@ air -c .air.conf
 
 then access to [swagger](http://localhost:1323/swagger/index.html)
 
+### How to update swagger ?
+
+1. update docs in controllers folder
+2. in root path, execute commend as follow
+
+```bash
+swag i
+```
+
 ## Reference
 
 - [Installed packages](docs/packages.md)
@@ -45,7 +54,3 @@ then access to [swagger](http://localhost:1323/swagger/index.html)
 - [gconvey in docker?](https://github.com/smartystreets/goconvey/issues/449)
 - [net/http status codes](http://golang.jp/pkg/http)
 - [echo middleware test](https://github.com/labstack/echo/issues/659)
-
-## TODO
-
-- swagger
