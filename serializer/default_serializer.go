@@ -6,16 +6,16 @@ type (
 		Message string `json:"message"`
 	}
 
-	successSerializer struct {
+	SuccessSerializer struct {
 		Result *successEntry `json:"result"`
 	}
 )
 
 // NewSuccessResponse return success message
-func NewSuccessResponse() *successSerializer {
+func NewSuccessResponse() *SuccessSerializer {
 	s := new(successEntry)
 	s.Code = "200"
 	s.Message = "success"
 
-	return &successSerializer{s}
+	return &SuccessSerializer{s}
 }

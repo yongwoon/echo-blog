@@ -13,11 +13,37 @@ ENVIRONMENT=test go test -v ./...
 ENVIRONMENT=test go test ./...
 ```
 
+## Swagger
+
+- [local swagger](http://localhost:1323/swagger/index.html)
+
+### How to use?
+
+```bash
+# Access to api container
+docker-compose exec api bash
+
+# run server
+air -c .air.conf
+```
+
+then access to [swagger](http://localhost:1323/swagger/index.html)
+
+### How to update swagger ?
+
+1. update docs in controllers folder
+2. in root path, execute commend as follow
+
+```bash
+swag i
+```
+
 ## Reference
 
 - [Installed packages](docs/packages.md)
 - [sql-migration command](docs/sql_migrate.md)
 - [Directory structure](docs/structure.md)
+- [How to write swagger](https://github.com/swaggo/swag#api-operation)
 
 ## Links
 
@@ -29,7 +55,3 @@ ENVIRONMENT=test go test ./...
 - [gconvey in docker?](https://github.com/smartystreets/goconvey/issues/449)
 - [net/http status codes](http://golang.jp/pkg/http)
 - [echo middleware test](https://github.com/labstack/echo/issues/659)
-
-## TODO
-
-- swagger
