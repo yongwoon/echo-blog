@@ -1,5 +1,52 @@
+basePath: /v2
+definitions:
+  serializer.PostListSerializer:
+    properties:
+      posts:
+        items:
+          $ref: '#/definitions/serializer.postSerializer'
+        type: array
+      postsCount:
+        type: integer
+    type: object
+  serializer.postSerializer:
+    properties:
+      body:
+        type: string
+      createdAt:
+        type: string
+      id:
+        type: integer
+      title:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+host: petstore.swagger.io
 info:
-  contact: {}
-  license: {}
-paths: {}
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a sample server Petstore server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Swagger Example API
+  version: "1.0"
+paths:
+  /api/v1/posts:
+    get:
+      consumes:
+      - application/json
+      description: get all posts
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/serializer.PostListSerializer'
+      summary: get posts
 swagger: "2.0"
