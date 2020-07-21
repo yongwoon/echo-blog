@@ -9,7 +9,7 @@ import (
 	"github.com/yongwoon/echo-blog/middleware"
 	"github.com/yongwoon/echo-blog/route"
 
-	_ "github.com/swaggo/echo-swagger/example/docs"
+	_ "github.com/yongwoon/echo-blog/docs"
 )
 
 // @title Swagger Example API
