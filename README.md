@@ -13,6 +13,22 @@ ENVIRONMENT=test go test -v ./...
 ENVIRONMENT=test go test ./...
 ```
 
+## Swagger
+
+- [local swagger](http://localhost:1323/swagger/index.html)
+
+### How to use?
+
+```bash
+# Access to api container
+docker-compose exec api bash
+
+# run server
+air -c .air.conf
+```
+
+then access to [swagger](http://localhost:1323/swagger/index.html)
+
 ## Reference
 
 - [Installed packages](docs/packages.md)
