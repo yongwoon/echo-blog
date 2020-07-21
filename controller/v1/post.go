@@ -44,6 +44,13 @@ func (p *PostController) Index(c echo.Context) error {
 }
 
 // Show api/v1/posts
+// @Summary find post by id
+// @Description find post by id
+// @Accept  json
+// @Produce  json
+// @Param post_id path int true "Post ID"
+// @Success 200 {object} serializer.SinglePostSerializer
+// @Router /api/v1/posts/{post_id} [get]
 func (p *PostController) Show(c echo.Context) error {
 	postID, err := strconv.ParseInt(c.Param("id"), 10, 64)
 
@@ -60,6 +67,13 @@ func (p *PostController) Show(c echo.Context) error {
 }
 
 // Create create post
+// @Summary create new post
+// @Description create new post
+// @Accept  json
+// @Produce  json
+// @Param post body form.PostCreateReq true "Post Body"
+// @Success 200 {object} serializer.SinglePostSerializer
+// @Router /api/v1/posts/ [post]
 func (p *PostController) Create(c echo.Context) error {
 	req, err := form.NewPost(c)
 	if err != nil {
@@ -76,6 +90,14 @@ func (p *PostController) Create(c echo.Context) error {
 }
 
 // Update post
+// @Summary Update post
+// @Description Update post
+// @Accept  json
+// @Produce  json
+// @Param post_id path int true "Post ID"
+// @Param post body form.PostUpdateReq true "Post Body"
+// @Success 200 {object} serializer.SinglePostSerializer
+// @Router /api/v1/posts/{post_id} [patch]
 func (p *PostController) Update(c echo.Context) error {
 	postID, err := strconv.ParseInt(c.Param("id"), 10, 64)
 
@@ -101,6 +123,13 @@ func (p *PostController) Update(c echo.Context) error {
 }
 
 // Delete post
+// @Summary Delete post
+// @Description Delete post
+// @Accept  json
+// @Produce  json
+// @Param post_id path int true "Post ID"
+// @Success 200 {object} serializer.SuccessSerializer
+// @Router /api/v1/posts/{post_id} [delete]
 func (p *PostController) Delete(c echo.Context) error {
 	postID, err := strconv.ParseInt(c.Param("id"), 10, 64)
 

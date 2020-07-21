@@ -1,5 +1,25 @@
 basePath: /v2
 definitions:
+  form.PostCreateReq:
+    properties:
+      post:
+        properties:
+          body:
+            type: string
+          title:
+            type: string
+        type: object
+    type: object
+  form.PostUpdateReq:
+    properties:
+      post:
+        properties:
+          body:
+            type: string
+          title:
+            type: string
+        type: object
+    type: object
   serializer.PostListSerializer:
     properties:
       posts:
@@ -8,6 +28,18 @@ definitions:
         type: array
       postsCount:
         type: integer
+    type: object
+  serializer.SinglePostSerializer:
+    properties:
+      post:
+        $ref: '#/definitions/serializer.postSerializer'
+        type: object
+    type: object
+  serializer.SuccessSerializer:
+    properties:
+      result:
+        $ref: '#/definitions/serializer.successEntry'
+        type: object
     type: object
   serializer.postSerializer:
     properties:
@@ -20,6 +52,13 @@ definitions:
       title:
         type: string
       updatedAt:
+        type: string
+    type: object
+  serializer.successEntry:
+    properties:
+      code:
+        type: string
+      message:
         type: string
     type: object
 host: petstore.swagger.io
@@ -49,4 +88,85 @@ paths:
           schema:
             $ref: '#/definitions/serializer.PostListSerializer'
       summary: get posts
+  /api/v1/posts/:
+    post:
+      consumes:
+      - application/json
+      description: create new post
+      parameters:
+      - description: Post Body
+        in: body
+        name: post
+        required: true
+        schema:
+          $ref: '#/definitions/form.PostCreateReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/serializer.SinglePostSerializer'
+      summary: create new post
+  /api/v1/posts/{post_id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete post
+      parameters:
+      - description: Post ID
+        in: path
+        name: post_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/serializer.SuccessSerializer'
+      summary: Delete post
+    get:
+      consumes:
+      - application/json
+      description: find post by id
+      parameters:
+      - description: Post ID
+        in: path
+        name: post_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/serializer.SinglePostSerializer'
+      summary: find post by id
+    patch:
+      consumes:
+      - application/json
+      description: Update post
+      parameters:
+      - description: Post ID
+        in: path
+        name: post_id
+        required: true
+        type: integer
+      - description: Post Body
+        in: body
+        name: post
+        required: true
+        schema:
+          $ref: '#/definitions/form.PostUpdateReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/serializer.SinglePostSerializer'
+      summary: Update post
 swagger: "2.0"

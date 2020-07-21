@@ -52,9 +52,164 @@ var doc = `{
                     }
                 }
             }
+        },
+        "/api/v1/posts/": {
+            "post": {
+                "description": "create new post",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "create new post",
+                "parameters": [
+                    {
+                        "description": "Post Body",
+                        "name": "post",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/form.PostCreateReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/serializer.SinglePostSerializer"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/posts/{post_id}": {
+            "get": {
+                "description": "find post by id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "find post by id",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Post ID",
+                        "name": "post_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/serializer.SinglePostSerializer"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete post",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Delete post",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Post ID",
+                        "name": "post_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/serializer.SuccessSerializer"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "Update post",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Update post",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Post ID",
+                        "name": "post_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Post Body",
+                        "name": "post",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/form.PostUpdateReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/serializer.SinglePostSerializer"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
+        "form.PostCreateReq": {
+            "type": "object",
+            "properties": {
+                "post": {
+                    "type": "object",
+                    "properties": {
+                        "body": {
+                            "type": "string"
+                        },
+                        "title": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "form.PostUpdateReq": {
+            "type": "object",
+            "properties": {
+                "post": {
+                    "type": "object",
+                    "properties": {
+                        "body": {
+                            "type": "string"
+                        },
+                        "title": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "serializer.PostListSerializer": {
             "type": "object",
             "properties": {
@@ -66,6 +221,24 @@ var doc = `{
                 },
                 "postsCount": {
                     "type": "integer"
+                }
+            }
+        },
+        "serializer.SinglePostSerializer": {
+            "type": "object",
+            "properties": {
+                "post": {
+                    "type": "object",
+                    "$ref": "#/definitions/serializer.postSerializer"
+                }
+            }
+        },
+        "serializer.SuccessSerializer": {
+            "type": "object",
+            "properties": {
+                "result": {
+                    "type": "object",
+                    "$ref": "#/definitions/serializer.successEntry"
                 }
             }
         },
@@ -85,6 +258,17 @@ var doc = `{
                     "type": "string"
                 },
                 "updatedAt": {
+                    "type": "string"
+                }
+            }
+        },
+        "serializer.successEntry": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "message": {
                     "type": "string"
                 }
             }

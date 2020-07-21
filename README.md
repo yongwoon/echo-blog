@@ -43,6 +43,7 @@ swag i
 - [Installed packages](docs/packages.md)
 - [sql-migration command](docs/sql_migrate.md)
 - [Directory structure](docs/structure.md)
+- [How to write swagger](https://github.com/swaggo/swag#api-operation)
 
 ## Links
 
