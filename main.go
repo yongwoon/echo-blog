@@ -37,6 +37,7 @@ func main() {
 	e.Use(echoMw.CORSWithConfig(echoMw.CORSConfig{
 		AllowOrigins: []string{
 			"http://localhost:8080",
+			"http://localhost:8888",
 		},
 		AllowMethods: []string{echo.GET, echo.PUT, echo.POST, echo.PATCH, echo.DELETE, echo.OPTIONS},
 		AllowHeaders: []string{
